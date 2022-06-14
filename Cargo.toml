@@ -9,8 +9,8 @@ repository  = "https://github.com/jewlexx/discord-presence.git"
 edition = "2021"
 
 [dependencies]
-discord-presence = "0.5"
-bevy = { version = "0.7", default-features = false }
+discord-presence = { version = "0.5", git = "https://github.com/jewlexx/discord-presence" }
+bevy = { version = "0.7", default-features = false, git = "https://github.com/bevyengine/bevy", tag = "v0.7.0" }
 parking_lot = "0.12"
 
 [dev-dependencies]
