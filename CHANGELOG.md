@@ -9,6 +9,12 @@ I will add links where possible, including retroactively if possible.
 
 ## [Unreleased](https://github.com/jewlexx/discord-presence/tree/trunk)
 
+## [0.3.2](https://github.com/jewlexx/bevy-discord-rpc/releases/tag/0.2.3) - 2022-06-19
+
+### Changed
+
+- Updated `discord-presence` dependency, with bug fixes
+
 ## [0.2.2](https://github.com/jewlexx/discord-presence/releases/tag/bevy-discord-rpc%400.2.2) - 2022-05-03
 
 ### Changed
