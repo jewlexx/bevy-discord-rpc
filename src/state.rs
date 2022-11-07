@@ -7,25 +7,36 @@ use discord_presence::{
 use parking_lot::Mutex;
 
 #[derive(Debug, Default, Clone)]
-pub struct Events(VecDeque<Event>);
+pub struct Events(pub(crate) VecDeque<Event>);
 
-impl Events {
+pub trait EventHandler {
     /// Return and remove the earliest event in the queue
     ///
     /// If it returns `None`, then the queue is empty
-    pub fn respond(&mut self) -> Option<Event> {
-        self.0.pop_front()
-    }
+    fn respond(&mut self) -> Option<Event>;
 
     /// Return and remove the most recent event in the queue
     ///
     /// If it returns `None`, then the queue is empty
-    pub fn respond_latest(&mut self) -> Option<Event> {
+    fn respond_latest(&mut self) -> Option<Event>;
+
+    /// Check if the given event has fired, removing it from the queue if so
+    fn respond_specific(&mut self, event: Event) -> bool;
+
+    /// Ignore all events, removing them
+    fn clear(&mut self);
+}
+
+impl EventHandler for Events {
+    fn respond(&mut self) -> Option<Event> {
+        self.0.pop_front()
+    }
+
+    fn respond_latest(&mut self) -> Option<Event> {
         self.0.pop_back()
     }
 
-    /// Check if the given event has fired, removing it from the queue if so
-    pub fn respond_specific(&mut self, event: Event) -> bool {
+    fn respond_specific(&mut self, event: Event) -> bool {
         if let Some(index) = self.0.iter().position(|e| *e == event) {
             self.0.remove(index);
             true
@@ -34,13 +45,26 @@ impl Events {
         }
     }
 
-    /// Ignore all events, removing them
-    pub fn clear(&mut self) {
+    fn clear(&mut self) {
         self.0.clear()
     }
+}
 
-    pub(crate) fn add(&mut self, event: discord_presence::Event) {
-        self.0.push_back(event);
+impl EventHandler for Arc<Mutex<Events>> {
+    fn respond(&mut self) -> Option<Event> {
+        self.lock().respond()
+    }
+
+    fn respond_latest(&mut self) -> Option<Event> {
+        self.lock().respond_latest()
+    }
+
+    fn respond_specific(&mut self, event: Event) -> bool {
+        self.lock().respond_specific(event)
+    }
+
+    fn clear(&mut self) {
+        self.lock().clear()
     }
 }
 

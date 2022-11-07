@@ -87,7 +87,7 @@ fn startup_client(
             let events = activity.events.clone();
 
             move |_| {
-                events.lock().add(event);
+                events.lock().0.push_back(event);
                 debug!("Added event: {:?}", event);
             }
         });
