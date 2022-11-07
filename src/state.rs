@@ -42,10 +42,6 @@ impl Events {
     pub(crate) fn add(&mut self, event: discord_presence::Event) {
         self.0.push_back(event);
     }
-
-    pub(crate) fn remove(&mut self, event: discord_presence::Event) {
-        self.0.retain(|e| e != &event);
-    }
 }
 
 /// The state that holds the Discord activity
