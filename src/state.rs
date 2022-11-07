@@ -1,9 +1,51 @@
-use discord_presence::models::{
-    Activity, ActivityAssets, ActivityParty, ActivitySecrets, ActivityTimestamps,
+use std::collections::VecDeque;
+
+use discord_presence::{
+    models::{Activity, ActivityAssets, ActivityParty, ActivitySecrets, ActivityTimestamps},
+    Event,
 };
 
 #[derive(Debug, Default, Clone)]
-pub struct Events(Vec<discord_presence::Event>);
+pub struct Events(VecDeque<Event>);
+
+impl Events {
+    /// Return and remove the earliest event in the queue
+    ///
+    /// If it returns `None`, then the queue is empty
+    pub fn respond(&mut self) -> Option<Event> {
+        self.0.pop_front()
+    }
+
+    /// Return and remove the most recent event in the queue
+    ///
+    /// If it returns `None`, then the queue is empty
+    pub fn respond_latest(&mut self) -> Option<Event> {
+        self.0.pop_back()
+    }
+
+    /// Check if the given event has fired, removing it from the queue if so
+    pub fn respond_specific(&mut self, event: Event) -> bool {
+        if let Some(index) = self.0.iter().position(|e| *e == event) {
+            self.0.remove(index);
+            true
+        } else {
+            false
+        }
+    }
+
+    /// Ignore all events, removing them
+    pub fn clear(&mut self) {
+        self.0.clear()
+    }
+
+    fn add(&mut self, event: discord_presence::Event) {
+        self.0.push_back(event);
+    }
+
+    fn remove(&mut self, event: discord_presence::Event) {
+        self.0.retain(|e| e != &event);
+    }
+}
 
 /// The state that holds the Discord activity
 #[derive(Debug, Default, Clone)]
