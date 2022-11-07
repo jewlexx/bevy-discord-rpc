@@ -1,9 +1,10 @@
-use std::collections::VecDeque;
+use std::{collections::VecDeque, sync::Arc};
 
 use discord_presence::{
     models::{Activity, ActivityAssets, ActivityParty, ActivitySecrets, ActivityTimestamps},
     Event,
 };
+use parking_lot::Mutex;
 
 #[derive(Debug, Default, Clone)]
 pub struct Events(VecDeque<Event>);
@@ -38,11 +39,11 @@ impl Events {
         self.0.clear()
     }
 
-    fn add(&mut self, event: discord_presence::Event) {
+    pub(crate) fn add(&mut self, event: discord_presence::Event) {
         self.0.push_back(event);
     }
 
-    fn remove(&mut self, event: discord_presence::Event) {
+    pub(crate) fn remove(&mut self, event: discord_presence::Event) {
         self.0.retain(|e| e != &event);
     }
 }
@@ -65,7 +66,7 @@ pub struct ActivityState {
     /// Secret passwords for joining and spectating the player's game. NOTE: Joining a party is not currently supported
     pub secrets: Option<ActivitySecrets>,
     /// The events that have fired for this activity
-    pub events: Events,
+    pub events: Arc<Mutex<Events>>,
 }
 
 impl From<ActivityState> for Activity {

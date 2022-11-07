@@ -30,7 +30,7 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use bevy::{log::prelude::*, prelude::*};
-use discord_presence::{models::ActivityTimestamps, Client};
+use discord_presence::{models::ActivityTimestamps, Client, Event};
 
 /// The Discord configuration
 mod config;
@@ -68,6 +68,8 @@ fn startup_client(
     mut client: ResMut<Client>,
     config: Res<RPCConfig>,
 ) {
+    use strum::IntoEnumIterator;
+
     if config.show_time {
         activity.timestamps = Some(ActivityTimestamps {
             start: Some(
@@ -80,13 +82,15 @@ fn startup_client(
         });
     }
 
-    client.on_ready(|_| {
-        debug!("Client is ready");
-    });
+    for event in Event::iter() {
+        client.on_event(event, {
+            let events = activity.events.clone();
 
-    client.on_error(|e| {
-        debug!("Client error: {:?}", e);
-    });
+            move |_| {
+                events.lock().add(event);
+            }
+        });
+    }
 
     client.start();
     debug!("Client has started");

@@ -12,6 +12,7 @@ edition = "2021"
 discord-presence = { version = "0.5", git = "https://github.com/jewlexx/discord-presence" }
 bevy = { version = ">=0.6" }
 parking_lot = "0.12"
+strum = "0.24.1"
 
 [dev-dependencies]
 version-sync = "0.9"
