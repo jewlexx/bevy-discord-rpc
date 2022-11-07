@@ -23,4 +23,7 @@ impl Default for RPCConfig {
 /// # Arguments
 ///
 /// * `config` - The configuration for the plugin. Vital field is `app_id`, as the Discord interactions cannot work without it.
-pub struct RPCPlugin(pub RPCConfig);
+pub struct RPCPlugin {
+    /// The Discord config used by the plugin
+    pub config: RPCConfig,
+}

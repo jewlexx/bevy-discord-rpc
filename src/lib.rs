@@ -43,7 +43,7 @@ use state::ActivityState;
 /// Implements the Bevy plugin trait
 impl Plugin for RPCPlugin {
     fn build(&self, app: &mut App) {
-        let client_config = self.0;
+        let client_config = self.config;
 
         app.add_startup_system(startup_client);
         app.add_system(check_activity_changed);
@@ -58,7 +58,7 @@ impl Plugin for RPCPlugin {
     }
 
     fn name(&self) -> &str {
-        "RPCPlugin"
+        "Discord Presence"
     }
 }
 
