@@ -88,6 +88,7 @@ fn startup_client(
 
             move |_| {
                 events.lock().add(event);
+                debug!("Added event: {:?}", event);
             }
         });
     }
