@@ -2,8 +2,11 @@ use discord_presence::models::{
     Activity, ActivityAssets, ActivityParty, ActivitySecrets, ActivityTimestamps,
 };
 
+#[derive(Debug, Default, Clone)]
+pub struct Events(Vec<discord_presence::Event>);
+
 /// The state that holds the Discord activity
-#[derive(Default, Clone)]
+#[derive(Debug, Default, Clone)]
 pub struct ActivityState {
     /// The player's current party status
     pub state: Option<String>,
@@ -19,6 +22,8 @@ pub struct ActivityState {
     pub party: Option<ActivityParty>,
     /// Secret passwords for joining and spectating the player's game. NOTE: Joining a party is not currently supported
     pub secrets: Option<ActivitySecrets>,
+    /// The events that have fired for this activity
+    pub events: Events,
 }
 
 impl From<ActivityState> for Activity {

@@ -1,5 +1,5 @@
 /// Configuration for the RPC plugin
-#[derive(Copy, Clone)]
+#[derive(Debug, Copy, Clone)]
 pub struct RPCConfig {
     /// The Discord application ID
     pub app_id: u64,
