@@ -27,3 +27,25 @@ pub struct RPCPlugin {
     /// The Discord config used by the plugin
     pub config: RPCConfig,
 }
+
+impl RPCPlugin {
+    /// Create a new plugin instance from config values
+    pub fn new(app_id: u64, show_time: bool) -> Self {
+        Self {
+            config: RPCConfig { app_id, show_time },
+        }
+    }
+
+    /// Create a new plugin instance from the given config
+    ///
+    /// Alias of [`RPCPlugin::from`]
+    pub fn from_config(config: RPCConfig) -> Self {
+        Self::from(config)
+    }
+}
+
+impl From<RPCConfig> for RPCPlugin {
+    fn from(config: RPCConfig) -> Self {
+        Self { config }
+    }
+}

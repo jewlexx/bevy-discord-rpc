@@ -1,9 +1,6 @@
 use bevy::prelude::*;
 
-use bevy_discord_presence::{
-    config::{RPCConfig, RPCPlugin},
-    state::ActivityState,
-};
+use bevy_discord_presence::{ActivityState, RPCConfig, RPCPlugin};
 
 fn main() {
     println!("hello world!");

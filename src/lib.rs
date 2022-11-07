@@ -33,12 +33,12 @@ use bevy::{log::prelude::*, prelude::*};
 use discord_presence::{models::ActivityTimestamps, Client};
 
 /// The Discord configuration
-pub mod config;
+mod config;
 /// The state that holds the Discord activity
-pub mod state;
+mod state;
 
-use config::{RPCConfig, RPCPlugin};
-use state::ActivityState;
+pub use config::{RPCConfig, RPCPlugin};
+pub use state::ActivityState;
 
 /// Implements the Bevy plugin trait
 impl Plugin for RPCPlugin {
