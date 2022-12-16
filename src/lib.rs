@@ -93,7 +93,7 @@ fn startup_client(
         });
     }
 
-    client.start();
+    _ = client.start();
     debug!("Client has started");
 }
 
