@@ -1,5 +1,6 @@
 use std::{collections::VecDeque, sync::Arc};
 
+use bevy::prelude::Resource;
 use discord_presence::{
     models::{Activity, ActivityAssets, ActivityParty, ActivitySecrets, ActivityTimestamps},
     Event,
@@ -69,7 +70,7 @@ impl EventHandler for Arc<Mutex<Events>> {
 }
 
 /// The state that holds the Discord activity
-#[derive(Debug, Default, Clone)]
+#[derive(Debug, Resource, Default, Clone)]
 pub struct ActivityState {
     /// The player's current party status
     pub state: Option<String>,

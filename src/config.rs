@@ -1,5 +1,7 @@
+use bevy::prelude::Resource;
+
 /// Configuration for the RPC plugin
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Resource, Copy, Clone)]
 pub struct RPCConfig {
     /// The Discord application ID
     pub app_id: u64,
