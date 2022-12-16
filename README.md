@@ -3,7 +3,7 @@
 [![crates.io](https://img.shields.io/crates/v/bevy-discord-presence)](https://crates.io/crates/bevy-discord-presence)
 [![crates.io](https://img.shields.io/crates/d/bevy-discord-presence)](https://crates.io/crates/bevy-discord-presence)
 [![Bevy tracking](https://img.shields.io/badge/Bevy%20tracking-main-lightblue)](https://github.com/bevyengine/bevy/blob/main/docs/plugins_guidelines.md#main-branch-tracking)
-[![docs.rs](https://docs.rs/bevy-discord-presence/badge)](https://docs.rs/bevy-discord-presence)
+[![docs.rs](https://img.shields.io/docsrs/bevy-discord-presence/latest)](https://docs.rs/bevy-discord-presence)
 
 A simplistic bevy plugin for discord presence integration within the bevy game engine
 
