@@ -7,16 +7,18 @@
 //!
 //! ```rust no_run
 //! use bevy::prelude::*;
-//! use bevy_discord_presence::{state::ActivityState, config::{RPCConfig, RPCPlugin}};
+//! use bevy_discord_presence::{ActivityState, RPCConfig, RPCPlugin};
 //!
 //! fn main() {
 //!     println!("hello world!");
 //!     let mut app = App::new();
 //!     app.add_plugins(DefaultPlugins);
-//!     app.add_plugin(RPCPlugin(RPCConfig {
-//!         app_id: 425407036495495169,
-//!         show_time: true,
-//!     }));
+//!     app.add_plugin(RPCPlugin {
+//!         config: RPCConfig {
+//!             app_id: 425407036495495169,
+//!             show_time: true,
+//!         }
+//!     });
 //!     app.add_system(update_presence);
 //!
 //!     app.run();
@@ -68,7 +70,7 @@ fn startup_client(
     mut client: ResMut<Client>,
     config: Res<RPCConfig>,
 ) {
-    use strum::IntoEnumIterator;
+    use quork::traits::list::ListVariants;
 
     if config.show_time {
         activity.timestamps = Some(ActivityTimestamps {
@@ -82,7 +84,7 @@ fn startup_client(
         });
     }
 
-    for event in Event::iter() {
+    for event in Event::VARIANTS {
         client.on_event(event, {
             let events = activity.events.clone();
 
