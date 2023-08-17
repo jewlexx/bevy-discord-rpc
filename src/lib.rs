@@ -7,16 +7,18 @@
 //!
 //! ```rust no_run
 //! use bevy::prelude::*;
-//! use bevy_discord_presence::{state::ActivityState, config::{RPCConfig, RPCPlugin}};
+//! use bevy_discord_presence::{ActivityState, RPCConfig, RPCPlugin};
 //!
 //! fn main() {
 //!     println!("hello world!");
 //!     let mut app = App::new();
 //!     app.add_plugins(DefaultPlugins);
-//!     app.add_plugin(RPCPlugin(RPCConfig {
-//!         app_id: 425407036495495169,
-//!         show_time: true,
-//!     }));
+//!     app.add_plugin(RPCPlugin {
+//!         config: RPCConfig {
+//!             app_id: 425407036495495169,
+//!             show_time: true,
+//!         }
+//!     });
 //!     app.add_system(update_presence);
 //!
 //!     app.run();
