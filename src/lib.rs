@@ -68,7 +68,7 @@ fn startup_client(
     mut client: ResMut<Client>,
     config: Res<RPCConfig>,
 ) {
-    use strum::IntoEnumIterator;
+    use quork::traits::list::ListVariants;
 
     if config.show_time {
         activity.timestamps = Some(ActivityTimestamps {
@@ -82,7 +82,7 @@ fn startup_client(
         });
     }
 
-    for event in Event::iter() {
+    for event in Event::VARIANTS {
         client.on_event(event, {
             let events = activity.events.clone();
 
