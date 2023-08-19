@@ -4,7 +4,7 @@ description = "Discord presence plugin for the Bevy game engine"
 license = "MIT"
 authors = ["Juliette Cordor"]
 keywords = ["discord", "rpc", "ipc"]
-version = "0.4.2"
+version = "0.4.3"
 repository  = "https://github.com/jewlexx/discord-presence.git"
 edition = "2021"
 
