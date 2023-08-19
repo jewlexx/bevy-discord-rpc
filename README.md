@@ -22,8 +22,6 @@ or run:
 cargo add bevy-discord-presence
 ```
 
-if you have `cargo-edit` installed
-
 ## Example
 
 ```rust
