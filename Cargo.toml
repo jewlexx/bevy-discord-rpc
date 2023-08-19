@@ -9,10 +9,11 @@ repository  = "https://github.com/jewlexx/discord-presence.git"
 edition = "2021"
 
 [dependencies]
-discord-presence = { version = "0.5.17", git = "https://github.com/jewlexx/discord-presence", features = ["bevy"] }
+discord-presence = { version = "0.5.17", git = "https://github.com/jewlexx/discord-presence" }
 bevy = { version = ">=0.9", default-features = false }
 parking_lot = "0.12"
 quork = { version = "0.4.0", default-features = false, features = ["traits"] }
+derive_more = "0.99.17"
 
 [dev-dependencies]
 version-sync = "0.9"

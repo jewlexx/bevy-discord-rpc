@@ -32,12 +32,25 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use bevy::{log::prelude::*, prelude::*};
-use discord_presence::{models::ActivityTimestamps, Client, Event};
+use discord_presence::{models::ActivityTimestamps, Client as DiscordClient, Event};
 
 /// The Discord configuration
 mod config;
 /// The state that holds the Discord activity
 mod state;
+
+/// A wrapper around the internal [`discord_presence::Client`] struct that implements [`bevy::prelude::Resource`]
+#[derive(Resource, derive_more::Deref, derive_more::DerefMut)]
+pub struct Client(DiscordClient);
+
+impl Client {
+    /// Instantiates a [`Client`] struct
+    ///
+    /// Wraps the internal [`discord_presence::Client`] struct
+    pub fn new(client_id: u64) -> Self {
+        Client(DiscordClient::new(client_id))
+    }
+}
 
 pub use config::{RPCConfig, RPCPlugin};
 pub use state::ActivityState;
@@ -47,6 +60,9 @@ impl Plugin for RPCPlugin {
     fn build(&self, app: &mut App) {
         let client_config = self.config;
 
+        // NOTE: I am aware this is deprecated
+        // For now, for the sake of backwards compatability with old Bevy versions we will keep using this
+        // If Bevy removes these functions in future, this will change
         app.add_startup_system(startup_client);
         app.add_system(check_activity_changed);
         debug!("Added systems");
