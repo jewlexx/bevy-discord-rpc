@@ -9,6 +9,34 @@ I will add links where possible, including retroactively if possible.
 
 ## [Unreleased](https://github.com/jewlexx/discord-presence/tree/trunk)
 
+## [0.4.3] - 2023-08-19
+
+### Removed
+
+- Removed reliance on `bevy` feature for `discord-presence` crate
+
+## [0.4.2](https://github.com/jewlexx/bevy-discord-rpc/releases/tag/v0.4.2) - 2023-08-17
+
+### Changed
+
+- Use quork `ListVariants` trait rather than `strum`
+
+## [0.4.1](https://github.com/jewlexx/bevy-discord-rpc/releases/tag/v0.4.1) - 2022-12-16
+
+### Changed
+
+- Add support for Bevy 0.9
+
+## [0.4.0](https://github.com/jewlexx/bevy-discord-rpc/releases/tag/v0.4.0) - 2022-11-07
+
+Full Changelog: [`v0.3.3...v0.4.0`](https://github.com/jewlexx/bevy-discord-rpc/compare/v0.3.3...v0.4.0)
+
+## [0.3.3](https://github.com/jewlexx/bevy-discord-rpc/releases/tag/v0.3.3) - 2022-08-05
+
+### Changed
+
+- Update to Bevy 0.8
+
 ## [0.3.2](https://github.com/jewlexx/bevy-discord-rpc/releases/tag/0.2.3) - 2022-06-19
 
 ### Changed
