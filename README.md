@@ -12,7 +12,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-bevy-discord-presence = "0.4"
+bevy-discord-presence = "0.5"
 ```
 
 or run:
