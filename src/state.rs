@@ -2,7 +2,10 @@ use std::{collections::VecDeque, sync::Arc};
 
 use bevy::prelude::Resource;
 use discord_presence::{
-    models::{Activity, ActivityAssets, ActivityParty, ActivitySecrets, ActivityTimestamps},
+    models::{
+        Activity, ActivityAssets, ActivityButton, ActivityParty, ActivitySecrets,
+        ActivityTimestamps,
+    },
     Event,
 };
 use parking_lot::Mutex;
@@ -88,6 +91,8 @@ pub struct ActivityState {
     pub secrets: Option<ActivitySecrets>,
     /// The events that have fired for this activity
     pub events: Arc<Mutex<Events>>,
+    /// The buttons to be displayed on the player's profile
+    pub buttons: Vec<ActivityButton>,
 }
 
 impl From<ActivityState> for Activity {
@@ -101,6 +106,7 @@ impl From<ActivityState> for Activity {
             secrets: state.secrets,
             timestamps: state.timestamps,
             instance: state.instance,
+            buttons: state.buttons,
         }
     }
 }
